@@ -60,7 +60,7 @@ export class TriageTask {
    */
   async searchNoLabel(context: probot.Context, labels?: string[]): Promise<probot.IssueParams> {
     const {owner, repo} = context.repo();
-    const labelsQ = labels ? labels.map(label => `-label:${label}`).join(' ') : 'no:label';
+    const labelsQ = labels ? labels.map(label => `-label:"${label}"`).join(' ') : 'no:label';
     const q = `repo:${owner}/${repo} is:open ${labelsQ}`;
     // todo handle pagination
     const search: github.SearchRequest<probot.IssueParams> = await context.github.search.issues({
